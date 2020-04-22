@@ -1,42 +1,49 @@
-﻿let DomElement=function () {
+'use strict';
+let DomElement=function (selector, height, width, bg, fontSize) {
     
 
-    selector='#block';
+   selector = selector;
 
-  height='200px'; 
+   height = '200px'; 
 
-width='200px';
+    width = '200px';
 
- bg= '#89EBF2'; 
+    bg = '#89EBF2'; 
 
-  fontSize='16pt';
+   fontSize ='16pt';
 
 };
 
-DomElement.prototype.ride=function () {
-    if( selector ==='.block'){
-        const elem = document.createElement('div');
-        elem.classList.add(selector);
-        elem.style.height=height;
-        elem.style.width=width;
-        elem.style.backgroundColor=bg;
-        elem.style.fontSize=fontSize;
-        elem.innerHTML=' любой текст';
+DomElement.prototype.ride=function (selector, height, width, bg, fontSize) {
+  let newSel0=selector.charAt(0);
+  console.log(newSel0);
+    if( newSel0 ==='.'){
+        let elem = document.createElement('div');
+        elem.style.cssText= `
+        width: ${width};
+        height:  ${height};
+        background: ${bg};
+        fontSize: ${fontSize};
+        `;
+        elem.innerHTML=' это div';
       document.body.append(elem);
 }
 else{
-    const elem = document.createElement('p');
-    elem.id = selector;
-     elem.style.height=height;
-    elem.style.width=width;
-    elem.style.backgroundColor=bg;
-    elem.style.fontSize=fontSize;
-    elem.innerHTML=' любой текст';
-  document.body.append(elem);
-}
+if( newSel0 ==='#'){
+  let elem = document.createElement('p');
+  elem.id = selector;
+  elem.style.cssText= `
+  width: ${width};
+  height:  ${height};
+  background: ${bg};
+  fontSize: ${fontSize};
+  `;
+  elem.innerHTML=' это параграф';
+document.body.append(elem);
+}}
 };
 
+
+
 let newDiv = new DomElement();
-newDiv.ride();
-
-
+newDiv.ride('#tt', '200px', '300px', 'gray', '20pt');
